@@ -4,7 +4,7 @@ Changelog - v2.1.6a
 Additions
 ------------
 
--Sample sets for the following puppets have been added: AHina, AKurumi, AMerlin, AMugetsu, AParsee, ASekibanki, ATsukasa, DAlice, DBenben, DChimata, DHecatia, DHijiri, DKikuri, DLouise, DMeiling, DRan, DRumia, DSuwako, DTenshi, DYatsuhashi, DYoshika, EChimata, EIku, EKikuri, EKokoro, EMagan, EMegumu, EMerlin, EMike, EMima, EMisumaru, EMugetsu, ENemuno, EPatchouli, ESaki, ETojiko, EUrumi, EYachie, PBenben, PCirno, PChimata, PKaguya, PKana, PKeiki, PKikuri, PKurumi, PLyrica, PMedicine, PMisumaru, PMugetsu, PMystia, PPatchouli, PRin, PRumia, PSagume, PSannyo, PShizuha, PShou, PSukuna, PTewi, PUdonge, PYoumu, PYuki, SChiyuri, SElis, SFuto, SGengetsu, SIku, SKagerou, SMarisa, SMeira, SMiko, SMomiji, SMomoyo, SRei'sen, SRemilia, SRikako, SSakuya, SWakasagi, SYatsuhashi, SYuki, SYumeko, SYumemi SYuugi
+-Sample sets for the following puppets have been added: AHina, AKurumi, AMerlin, AMugetsu, AParsee, ASekibanki, ATsukasa, DAlice, DBenben, DChimata, DHecatia, DHijiri, DKikuri, DLouise, DMeiling, DRan, DRumia, DSuwako, DTenshi, DYatsuhashi, DYoshika, EChimata, EIku, EKikuri, EKokoro, EMagan, EMegumu, EMerlin, EMike, EMima, EMisumaru, EMugetsu, ENemuno, EPatchouli, ESaki, ETojiko, EUrumi, EYachie, PBenben, PCirno, PChimata, PKaguya, PKana, PKeiki, PKikuri, PKurumi, PLyrica, PMedicine, PMisumaru, PMugetsu, PMystia, PPatchouli, PRin, PRumia, PSagume, PSannyo, PShizuha, PShou, PSukuna, PTewi, PUdonge, PYoumu, PYuki, SChiyuri, SElis, SFuto, SGengetsu, SIku, SKagerou, SMarisa, SMeira, SMiko, SMomiji, SMomoyo, SRei'sen, SRemilia, SRikako, SSakuya, SWakasagi, SYatsuhashi, SYuki, SYumeko, SYumemi, SYuugi
 
 Changes
 ------------
