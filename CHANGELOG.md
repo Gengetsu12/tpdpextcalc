@@ -1,3 +1,45 @@
+Changelog - v2.1.6a
+=======================
+
+Additions
+------------
+
+-Sample sets for the following puppets have been added: AHina, AKurumi, AMerlin, AMugetsu, AParsee, ASekibanki, ATsukasa, DAlice, DBenben, DChimata, DHecatia, DHijiri, DKikuri, DLouise, DMeiling, DRan, DRumia, DSuwako, DTenshi, DYatsuhashi, DYoshika, EChimata, EIku, EKikuri, EKokoro, EMagan, EMegumu, EMerlin, EMike, EMima, EMisumaru, EMugetsu, ENemuno, EPatchouli, ESaki, ETojiko, EUrumi, EYachie, PBenben, PCirno, PChimata, PKaguya, PKana, PKeiki, PKikuri, PKurumi, PLyrica, PMedicine, PMisumaru, PMugetsu, PMystia, PPatchouli, PRin, PRumia, PSagume, PSannyo, PShizuha, PShou, PSukuna, PTewi, PUdonge, PYoumu, PYuki, SChiyuri, SElis, SFuto, SGengetsu, SIku, SKagerou, SMarisa, SMeira, SMiko, SMomiji, SMomoyo, SRei'sen, SRemilia, SRikako, SSakuya, SWakasagi, SYatsuhashi, SYuki, SYumeko, SYumemi SYuugi
+
+Changes
+------------
+
+-Sample sets for the following puppets have been modified: AMugetsu, DSukuna, EAlice, ECirno, EKikuri, EWakasagi, EYuuka, PKoishi, PRuukoto, SYumeko
+
+Bugfixes
+------------
+
+-Reckless now correctly applies its damage boost
+
+-Struggle is no longer treated as a void type move by 'form' moves
+
+-Damage ranges for recoil and recovery now properly display
+
+-Dream type moves now properly bypass Frail Health
+
+-Eastern Expanse now properly ignores type chart immunities
+
+-Dense Fog Bloom and Rainbow Flowers now properly have lowered damage under non Heavy fog/Aurora weather respectively
+
+-Rainbow Flowers no longer has its damage reduction ignored when a Fast Talker puppet uses it under Aurora
+
+-Golden/Silver Hairpin now correctly increase defenses under Sunshower
+
+-Tsuzumi Drum now properly increases of Void type moves when type changed by a 'form' ability and boosted by STAB
+
+Changelog - v2.1.5a
+=======================
+
+Additions
+------------
+
+-Added support for story mode
+
 Changelog - v2.1.4
 =======================
 

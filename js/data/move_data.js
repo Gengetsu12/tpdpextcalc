@@ -68,7 +68,8 @@ var MOVES_YNK = {
 		isEN: true,
 		bp: 120,
 		acc100: true,
-		isVoid: true
+		isVoid: true,
+		hasRecoil: "number"
 	},
 	"Spirit Rush": {
 		type: "Void",
@@ -76,7 +77,8 @@ var MOVES_YNK = {
 		isEN: true,
 		bp: 120,
 		acc100: true,
-		isVoid: true
+		isVoid: true,
+		hasRecoil: "number"
 	},
 	"Frenzied Joururi": {
 		type: "Void",
@@ -120,7 +122,7 @@ var MOVES_YNK = {
 		category: "Focus",
 		bp: 51,
 		alwaysHits: true,
-		isVoid: true
+		hasRecoil: "number"
 	},
 	"Cruciform": {
 		type: "Void",
@@ -441,7 +443,8 @@ var MOVES_YNK = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
-		hasSecondaryEffect: true
+		hasSecondaryEffect: true,
+		hasRecoil: "number"
 	},
 	"Holy Flare": {
 		type: "Fire",
@@ -850,7 +853,8 @@ var MOVES_YNK = {
 		type: "Nature",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Voice of Famine": {
 		type: "Nature",
@@ -880,7 +884,8 @@ var MOVES_YNK = {
 		category: "Focus",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Hornet's Flit": {
 		type: "Nature",
@@ -1253,7 +1258,8 @@ var MOVES_YNK = {
 		type: "Steel",
 		category: "Focus",
 		bp: 150,
-		accuracy: 80
+		accuracy: 80,
+		hasRecoil: "number"
 	},
 	"Samurai Edge": {
 		type: "Steel",
@@ -1266,7 +1272,8 @@ var MOVES_YNK = {
 		type: "Steel",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Armor Pierce": {
 		type: "Steel",
@@ -1416,7 +1423,8 @@ var MOVES_YNK = {
 		type: "Wind",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Wind Javelin": {
 		type: "Wind",
@@ -1610,7 +1618,8 @@ var MOVES_YNK = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
-		hasSecondaryEffect: true
+		hasSecondaryEffect: true,
+		hasRecoil: "number"
 	},
 	"Lightning Cut": {
 		type: "Electric",
@@ -1779,7 +1788,8 @@ var MOVES_YNK = {
 		category: "Focus",
 		isEN: true,
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Evil-Crushing Arrow": {
 		type: "Light",
@@ -2271,7 +2281,8 @@ var MOVES_YNK = {
 		type: "Nether",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Stalk and Murder": {
 		type: "Nether",
@@ -2482,7 +2493,8 @@ var MOVES_YNK = {
 		type: "Fighting",
 		category: "Focus",
 		bp: 130,
-		accuracy: 90
+		accuracy: 90,
+		hasRecoil: "crash"
 	},
 	"Exploding Fist": {
 		type: "Fighting",
@@ -3399,7 +3411,8 @@ var MOVES_SOD = {
 		isEN: true,
 		bp: 120,
 		acc100: true,
-		isVoid: true
+		isVoid: true,
+		hasRecoil: "number"
 	},
 	"Spirit Rush": {
 		type: "Void",
@@ -3407,7 +3420,8 @@ var MOVES_SOD = {
 		isEN: true,
 		bp: 120,
 		acc100: true,
-		isVoid: true
+		isVoid: true,
+		hasRecoil: "number"
 	},
 	"Frenzied Joururi": {
 		type: "Void",
@@ -3451,7 +3465,7 @@ var MOVES_SOD = {
 		category: "Focus",
 		bp: 51,
 		alwaysHits: true,
-		isVoid: true
+		hasRecoil: "number"
 	},
 	"Cruciform": {
 		type: "Void",
@@ -3772,7 +3786,8 @@ var MOVES_SOD = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
-		hasSecondaryEffect: true
+		hasSecondaryEffect: true,
+		hasRecoil: "number"
 	},
 	"Holy Flare": {
 		type: "Fire",
@@ -4211,7 +4226,8 @@ var MOVES_SOD = {
 		category: "Focus",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Hornet's Flit": {
 		type: "Nature",
@@ -4584,7 +4600,8 @@ var MOVES_SOD = {
 		type: "Steel",
 		category: "Focus",
 		bp: 150,
-		accuracy: 80
+		accuracy: 80,
+		hasRecoil: "number"
 	},
 	"Samurai Edge": {
 		type: "Steel",
@@ -4597,7 +4614,8 @@ var MOVES_SOD = {
 		type: "Steel",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Armor Pierce": {
 		type: "Steel",
@@ -4747,7 +4765,8 @@ var MOVES_SOD = {
 		type: "Wind",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Wind Javelin": {
 		type: "Wind",
@@ -4941,7 +4960,8 @@ var MOVES_SOD = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
-		hasSecondaryEffect: true
+		hasSecondaryEffect: true,
+		hasRecoil: "number"
 	},
 	"Lightning Cut": {
 		type: "Electric",
@@ -5110,7 +5130,8 @@ var MOVES_SOD = {
 		category: "Focus",
 		isEN: true,
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Evil-Crushing Arrow": {
 		type: "Light",
@@ -5602,7 +5623,8 @@ var MOVES_SOD = {
 		type: "Nether",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Stalk and Murder": {
 		type: "Nether",
@@ -5813,7 +5835,8 @@ var MOVES_SOD = {
 		type: "Fighting",
 		category: "Focus",
 		bp: 130,
-		accuracy: 90
+		accuracy: 90,
+		hasRecoil: "crash"
 	},
 	"Exploding Fist": {
 		type: "Fighting",
@@ -6679,7 +6702,8 @@ var MOVES_BASE = {
 		isEN: true,
 		bp: 120,
 		acc100: true,
-		isVoid: true
+		isVoid: true,
+		hasRecoil: "number"
 	},
 	"Spirit Rush": {
 		type: "Void",
@@ -6687,7 +6711,8 @@ var MOVES_BASE = {
 		isEN: true,
 		bp: 120,
 		acc100: true,
-		isVoid: true
+		isVoid: true,
+		hasRecoil: "number"
 	},
 	"Frenzied Joururi": {
 		type: "Void",
@@ -6731,7 +6756,7 @@ var MOVES_BASE = {
 		category: "Focus",
 		bp: 50,
 		alwaysHits: true,
-		isVoid: true
+		hasRecoil: "number"
 	},
 	"Cruciform": {
 		type: "Void",
@@ -6994,7 +7019,8 @@ var MOVES_BASE = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
-		hasSecondaryEffect: true
+		hasSecondaryEffect: true,
+		hasRecoil: "number"
 	},
 	"Holy Flare": {
 		type: "Fire",
@@ -7433,7 +7459,8 @@ var MOVES_BASE = {
 		category: "Focus",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Hornet's Flit": {
 		type: "Nature",
@@ -7789,7 +7816,8 @@ var MOVES_BASE = {
 		type: "Steel",
 		category: "Focus",
 		bp: 150,
-		accuracy: 80
+		accuracy: 80,
+		hasRecoil: "number"
 	},
 	"Samurai Edge": {
 		type: "Steel",
@@ -7802,7 +7830,8 @@ var MOVES_BASE = {
 		type: "Steel",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Armor Pierce": {
 		type: "Steel",
@@ -7944,7 +7973,8 @@ var MOVES_BASE = {
 		type: "Wind",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Wind Javelin": {
 		type: "Wind",
@@ -8111,7 +8141,8 @@ var MOVES_BASE = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
-		hasSecondaryEffect: true
+		hasSecondaryEffect: true,
+		hasRecoil: "number"
 	},
 	"Lightning Cut": {
 		type: "Electric",
@@ -8260,7 +8291,8 @@ var MOVES_BASE = {
 		category: "Focus",
 		isEN: true,
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Evil-Crushing Arrow": {
 		type: "Light",
@@ -8702,7 +8734,8 @@ var MOVES_BASE = {
 		type: "Nether",
 		category: "Focus",
 		bp: 120,
-		acc100: true
+		acc100: true,
+		hasRecoil: "number"
 	},
 	"Stalk and Murder": {
 		type: "Nether",
@@ -8895,7 +8928,8 @@ var MOVES_BASE = {
 		type: "Fighting",
 		category: "Focus",
 		bp: 130,
-		accuracy: 90
+		accuracy: 90,
+		hasRecoil: "crash"
 	},
 	"Exploding Fist": {
 		type: "Fighting",

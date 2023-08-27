@@ -143,9 +143,10 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 
 	//Form ability handler
 	var formCheck = ["Stream Form", "Natural Form", "Unyielding Form", "Gale Form", "Bright Form", "Midnight Form", "Ghost Form", "Desolation Form", "General's Form"].indexOf(atkAbility);
+	var formBoosted = false;
 	if (formCheck !== -1 && move.type === "Void") {
 		move.type = ["Water", "Nature", "Steel", "Wind", "Light", "Dark", "Nether", "Earth", "Fighting"][formCheck];
-		description.attackerAbility = atkAbility;
+		formBoosted = true;
 	}
 
 	//Flat Speed correction
@@ -159,10 +160,10 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	}
 
 	//Type Effectiveness Calculation
-	var typeEffect1 = getMoveEffectiveness(move, defender.type1, atkAbility === "Common Senseless");
-	var typeEffect2 = defender.type2 ? getMoveEffectiveness(move, defender.type2, atkAbility === "Common Senseless") : 1;
+	var typeEffect1 = getMoveEffectiveness(move, defender.type1, atkAbility === "Common Senseless" || atkAbility === "Eastern Expanse" && field.terrain === "Seiryu");
+	var typeEffect2 = defender.type2 ? getMoveEffectiveness(move, defender.type2, atkAbility === "Common Senseless" || atkAbility === "Eastern Expanse" && field.terrain === "Seiryu") : 1;
 	var typeEffectiveness = typeEffect1 * typeEffect2;
-	if (atkAbility === "Common Senseless") {
+	if (atkAbility === "Common Senseless" || atkAbility === "Eastern Expanse" && field.terrain === "Seiryu") {
 		description.attackerAbility = atkAbility;
 	}
 
@@ -224,7 +225,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 		"Sound Absorb": "Sound",
 		"In Sync": "Warped",
 	};
-	if ((defAbility === "Frail Health" && typeEffectiveness <= 1) ||
+	if ((defAbility === "Frail Health" && (typeEffectiveness <= 1 && !(move.type === "Dream"))) ||
         (whenHitByA[defAbility] && move.type === whenHitByA[defAbility]) ||
         (move.hasPriority && defAbility === "Intuition") ||
         (move.willCharge && defAbility === "Restraint") ||
@@ -456,6 +457,22 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 			description.moveBP = basePower;
 		}
 		break;
+	case "Rainbow Flowers":
+		if (field.weather === "") {
+			basePower = move.bp;
+			break;
+		}
+		basePower = move.bp * (field.weather !== "Aurora" ? .5 : 1);
+		description.moveBP = basePower;
+		break;
+	case "Dense Fog Bloom":
+		if (field.weather === "") {
+			basePower = move.bp;
+			break;
+		}
+		basePower = move.bp * (field.weather !== "Heavy Fog" ? .5 : 1);
+		description.moveBP = basePower;
+		break;
 	default:
 		basePower = move.bp;
 	}
@@ -595,7 +612,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	} else if ((atkItem === "Radiant Hairpin" && attacker.curHP / attacker.maxHP === 1) && gen === 8) {
 		finalMods.push(1.4);
 		description.attackerItem = attacker.item;
-	} else if (atkItem === "Straw Doll" || (atkItem === "Radiant Hairpin" && attacker.curHP / attacker.maxHP === 1) && gen !== 8 || atkItem === "Tsuzumi Drum" && !isSTAB) {
+	} else if (atkItem === "Straw Doll" || (atkItem === "Radiant Hairpin" && attacker.curHP / attacker.maxHP === 1) && gen !== 8 || (atkItem === "Tsuzumi Drum" && (!isSTAB) || (formBoosted === true))) {
 		finalMods.push(1.3);
 		description.attackerItem = atkItem;
 	} else if (atkItem === "Javelin Arts" && move.isJavelin === true || atkItem === "Deadly Secrets" && typeEffectiveness > 1) {
@@ -621,7 +638,11 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 		finalMods.push(0.5);
 		description.defenderItem = defItem;
 	//TODO: do Golden Hairpin/similar actually increase defense, or does it affect damage in this step?
-	} else if (defender.item === "Golden Hairpin" && defenseStat === FD || defender.item === "Silver Hairpin" && defenseStat === SD) {
+	//sunshower is so fucked in this calculator lmao, this is definitely not the only problem but I'm too lazy to test every interaction
+	} else if ((defender.item === "Golden Hairpin" && defenseStat === FD || defender.item === "Silver Hairpin" && defenseStat === SD) && !(field.weather === "Sunshower")) {
+		finalMods.push(2 / 3); //1/1.5 = 2/3
+		description.defenderItem = defender.item;
+	} else if ((defender.item === "Golden Hairpin" && defenseStat === SD || defender.item === "Silver Hairpin" && defenseStat === FD) && field.weather === "Sunshower") {
 		finalMods.push(2 / 3); //1/1.5 = 2/3
 		description.defenderItem = defender.item;
 	} else if (defender.item === "Iron Will Ribbon" && ironWill) {
@@ -675,7 +696,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	           (atkAbility === "After Move" && turnOrder !== "FIRST") || //TODO: After Move is a stat increase? prob not
 	           (atkAbility === "On the Edge" && attacker.curHP === 1) || formCheck !== -1 && move.isVoid === true) {
 		pendingMod = 1.3;
-	} else if ((atkAbility === "Reckless" && (typeof move.hasRecoil === 'number' || move.hasRecoil === 'crash')) ||
+	} else if ((atkAbility === "Reckless" && (move.hasRecoil === 'number' || move.hasRecoil === 'crash')) ||
                (atkAbility === "Western Expanse" && field.terrain === "Byakko" && move.acc100) ||
 			   (atkAbility === "Empowered" && move.isEN) ||
 			   (atkAbility === "Astronomy" && !(move.isEN)) ||
@@ -684,7 +705,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 		pendingMod = 1.2;
 	} else if (atkAbility === "Mindless Dance" && move.willLock) {
 		pendingMod = 0.9;
-	} else if (atkAbility === "Fast Talker" && move.willCharge && !(move.name === "Rainbow Flowers" && field.weather === "Aurora")) {
+	} else if (atkAbility === "Fast Talker" && move.willCharge) {
 		pendingMod = 0.9;
 	} else if ((atkAbility === "Known Limits" && !isSTAB) ||
 	           (doppelganger)) { //Two of a Kind flag

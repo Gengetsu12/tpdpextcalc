@@ -52,57 +52,102 @@ function calculate() {
 		result.koChanceText = p1.moves[i].bp === 0 ? 'nice move' :
 			getKOChanceText(result.damage, p1, p2, field.getSide(1), p1.moves[i], p1.moves[i].hits, p1.ability === 'Dream World');
 		var recoveryText = '';
-		if (p1.moves[i].givesHealth) {
-			var minHealthRecovered = notation === '%' ? Math.floor(minDamage * p1.moves[i].percentHealed * 1000 / p1.maxHP) /
-                10 : Math.floor(minDamage * p1.moves[i].percentHealed * 48 / p1.maxHP);
-			var maxHealthRecovered = notation === '%' ? Math.floor(maxDamage * p1.moves[i].percentHealed * 1000 / p1.maxHP) /
-                10 : Math.floor(maxDamage * p1.moves[i].percentHealed * 48 / p1.maxHP);
-			if (minHealthRecovered > 100 && notation === '%') {
-				minHealthRecovered = Math.floor(p2.maxHP * p1.moves[i].percentHealed * 1000 / p1.maxHP) / 10;
-				maxHealthRecovered = Math.floor(p2.maxHP * p1.moves[i].percentHealed * 1000 / p1.maxHP) / 10;
-			} else if (notation !== '%' && minHealthRecovered > 48) {
-				minHealthRecovered = Math.floor(p2.maxHP * p1.moves[i].percentHealed * 48 / p1.maxHP);
-				maxHealthRecovered = Math.floor(p2.maxHP * p1.moves[i].percentHealed * 48 / p1.maxHP);
+		var recoveryMultiplier = 1/2
+		if (p1.moves[i].givesHealth === true) {
+			var minRecovery = Math.floor((Math.min(minDamage, p2.curHP)) * recoveryMultiplier);
+			if (minRecovery === 0) {
+				minRecoilDamage = 0;
 			}
-			recoveryText = ' (' + minHealthRecovered + ' - ' + maxHealthRecovered + notation + ' recovered)';
+			if (p1.ability === 'Overcompensate') {
+				minRecovery *= 1.3
+			}
+			if (p1.item === 'Bandage') {
+				minRecovery *= 1.3
+			}
+			minRecovery = (minRecovery / p1.maxHP) * 100;
+			minRecovery = Math.round(minRecovery * 10) / 10;
+			if (minDamage === 0) {
+				minRecovery = 0;
+			}
+			
+			var maxRecovery = Math.floor((Math.min(maxDamage, p2.curHP)) * recoveryMultiplier);
+			if (maxRecovery === 0) {
+				maxRecovery = 0;
+			}
+			if (p1.ability === 'Overcompensate') {
+				maxRecovery *= 1.3
+			}
+			if (p1.item === 'Bandage') {
+				maxRecovery *= 1.3
+			}
+			maxRecovery = (maxRecovery / p1.maxHP) * 100;
+			maxRecovery = Math.round(maxRecovery * 10) / 10;
+			if (maxDamage === 0) {
+				maxRecovery = 0;
+			}
+			if (minRecovery > 100) {
+				minRecovery = 100;
+			}
+			if (maxRecovery > 100) {
+				maxRecovery = 100;
+			}
+			if (p2.ability === 'Bad Medicine') {
+				recoveryText = (' (' + minRecovery + ' - ' + maxRecovery + notation + ' recoil)');
+			} else {
+				recoveryText = (' (' + minRecovery + ' - ' + maxRecovery + notation + ' recovered)');
+			}
 		}
+		//recoil handler
+		//code rewrite because the old one didn't work
 		var recoilText = '';
-		if (typeof p1.moves[i].hasRecoil === 'number') {
-			var damageOverflow = minDamage > p2.curHP || maxDamage > p2.curHP;
-			var minRecoilDamage = notation === '%' ? Math.floor(Math.min(minDamage, p2.curHP) * p1.moves[i].hasRecoil * 10 / p1.maxHP) / 10 :
-				Math.floor(Math.min(minDamage, p2.curHP) * p1.moves[i].hasRecoil * 0.48 / p1.maxHP);
-			var maxRecoilDamage = notation === '%' ? Math.floor(Math.min(maxDamage, p2.curHP) * p1.moves[i].hasRecoil * 10 / p1.maxHP) / 10 :
-				Math.floor(Math.min(maxDamage, p2.curHP) * p1.moves[i].hasRecoil * 0.48 / p1.maxHP);
-			if (damageOverflow) {
-				minRecoilDamage = notation === '%' ? Math.floor(p2.curHP * p1.moves[i].hasRecoil * 10 / p1.maxHP) / 10 :
-					Math.floor(p2.maxHP * p1.moves[i].hasRecoil * 0.48 / p1.maxHP);
-				maxRecoilDamage = notation === '%' ? Math.floor(p2.curHP * p1.moves[i].hasRecoil * 10 / p1.maxHP) / 10 :
-					Math.floor(p2.curHP * p1.moves[i].hasRecoil * 0.48 / p1.maxHP);
+		var recoilMultiplier = 1/3
+		if (p1.moves[i].name === 'Spirit Rush') {
+			recoilMultiplier = 1/4;
+		} else if (p1.moves[i].name === 'Full Metal Crash') {
+			recoilMultiplier = 1/2;
+		}
+		if (p1.moves[i].hasRecoil === 'number') {
+			var minRecoilDamage = Math.floor((Math.min(minDamage, p2.curHP)) * recoilMultiplier);
+			if (minRecoilDamage === 0) {
+				minRecoilDamage = 1;
 			}
-			recoilText = ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' recoil damage)';
+			minRecoilDamage = (minRecoilDamage / p1.maxHP) * 100;
+			minRecoilDamage = Math.round(minRecoilDamage * 10) / 10;
+			if (minDamage === 0) {
+				minRecoilDamage = 0;
+			}
+			
+			var maxRecoilDamage = Math.floor((Math.min(maxDamage, p2.curHP)) * recoilMultiplier);
+			if (maxRecoilDamage === 0) {
+				maxRecoilDamage = 1;
+			}
+			maxRecoilDamage = (maxRecoilDamage / p1.maxHP) * 100;
+			maxRecoilDamage = Math.round(maxRecoilDamage * 10) / 10;
+			if (maxDamage === 0) {
+				maxRecoilDamage = 0;
+			}
+			if (minRecoilDamage > 100) {
+				minRecoilDamage = 100;
+			}
+			if (maxRecoilDamage > 100) {
+				maxRecoilDamage = 100;
+			}
+			if (p1.ability === 'Recoil Offset' || p1.ability === 'Imposing Stance') {
+				minRecoilDamage = 0;
+				maxRecoilDamage = 0;
+			}
+			recoilText = (' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' recoil damage)');
 		} else if (p1.moves[i].hasRecoil === 'crash') {
-			var genMultiplier = gen === 2 ? 12.5 : gen >= 3 ? 50 : 1;
-			var gen4CrashDamage = Math.floor(p2.maxHP * 0.5 / p1.maxHP * 100);
-			var minRecoilDamage = notation === '%' ? Math.floor(Math.min(minDamage, p2.maxHP) * genMultiplier * 10 / p1.maxHP) / 10 :
-			   Math.floor(Math.min(minDamage, p2.maxHP) * genMultiplier * 0.48 / p1.maxHP);
-			var maxRecoilDamage = notation === '%' ? Math.floor(Math.min(maxDamage, p2.maxHP) * genMultiplier * 10 / p1.maxHP) / 10 :
-				Math.floor(Math.min(maxDamage, p2.maxHP) * genMultiplier * 0.48 / p1.maxHP);
-			if (damageOverflow && gen !== 2) {
-				minRecoilDamage = notation === '%' ? Math.floor(p2.curHP * genMultiplier * 10 / p1.maxHP) / 10 :
-					Math.floor(p2.curHP * genMultiplier * 0.48 / p1.maxHP);
-				maxRecoilDamage = notation === '%' ? Math.floor(p2.maxHP * genMultiplier * 10 / p1.maxHP) / 10 :
-					Math.floor(Math.min(p2.maxHP, p1.maxHP) * genMultiplier * 0.48);
+			var crashDamage = Math.floor(p1.maxHP / 2);
+			if (crashDamage === 0) {
+				crashDamage = 1;
 			}
-			recoilText = gen === 1 ? ' (1hp damage on miss)' :
-				gen === 2 ? (p2.type1 === "Ghost" || p2.type2 === "Ghost") ? ' (no crash damage on Ghost types)' : ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' crash damage on miss)' :
-					gen === 3 ? (p2.type1 === "Ghost" || p2.type2 === "Ghost") ? ' (no crash damage on Ghost types)' : ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' crash damage on miss)' :
-						gen === 4 ? (p2.type1 === "Ghost" || p2.type2 === "Ghost") ? ' (' + gen4CrashDamage + '% crash damage)' : ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' crash damage on miss)' :
-							gen > 4 ? ' (50% crash damage)' :
-								'';
-		} else if (p1.moves[i].hasRecoil === 'Struggle') {
-			recoilText = ' (33% struggle damage)';
-		} else if (p1.moves[i].hasRecoil) {
-			recoilText = ' (50% recoil damage)';
+			crashDamage = (crashDamage / p1.maxHP) * 100;
+			crashDamage = Math.round(crashDamage * 10) / 10;
+			if (p1.ability === 'Imposing Stance') {
+				crashDamage = 0;
+			}
+			recoilText = (' (' +  crashDamage + '%' + ' crash damage)');
 		}
 		$(resultLocations[0][i].move + " + label").text(p1.moves[i].name.replace("Hidden Power", "HP"));
 		$(resultLocations[0][i].damage).text(minDisplay + " - " + maxDisplay + notation + recoveryText + recoilText);
@@ -123,57 +168,103 @@ function calculate() {
 		result.damageText = minDamage + "-" + maxDamage + " (" + minDisplay + " - " + maxDisplay + notation + ")";
 		result.koChanceText = p2.moves[i].bp === 0 ? 'nice move' :
 			getKOChanceText(result.damage, p2, p1, field.getSide(0), p2.moves[i], p2.moves[i].hits, p2.ability === 'Dream World');
-		if (p2.moves[i].givesHealth) {
-			var minHealthRecovered = notation === '%' ? Math.floor(minDamage * p2.moves[i].percentHealed * 1000 / p2.maxHP) /
-                10 : Math.floor(minDamage * p2.moves[i].percentHealed * 48 / p2.maxHP);
-			var maxHealthRecovered = notation === '%' ? Math.floor(maxDamage * p2.moves[i].percentHealed * 1000 / p2.maxHP) /
-                10 : Math.floor(maxDamage * p2.moves[i].percentHealed * 48 / p2.maxHP);
-			if (minHealthRecovered > 100 && notation === '%') {
-				minHealthRecovered = Math.floor(p1.maxHP * p2.moves[i].percentHealed * 1000 / p2.maxHP) / 10;
-				maxHealthRecovered = Math.floor(p1.maxHP * p2.moves[i].percentHealed * 1000 / p2.maxHP) / 10;
-			} else if (notation !== '%' && minHealthRecovered > 48) {
-				minHealthRecovered = Math.floor(p1.maxHP * p2.moves[i].percentHealed * 48 / p2.maxHP);
-				maxHealthRecovered = Math.floor(p1.maxHP * p2.moves[i].percentHealed * 48 / p2.maxHP);
+		var recoveryText = '';
+		var recoveryMultiplier = 1/2
+		if (p2.moves[i].givesHealth === true) {
+			var minRecovery = Math.floor((Math.min(minDamage, p1.curHP)) * recoveryMultiplier);
+			if (minRecovery === 0) {
+				minRecoilDamage = 0;
 			}
-			recoveryText = ' (' + minHealthRecovered + ' - ' + maxHealthRecovered + notation + ' recovered)';
+			if (p2.ability === 'Overcompensate') {
+				minRecovery *= 1.3
+			}
+			if (p2.item === 'Bandage') {
+				minRecovery *= 1.3
+			}
+			minRecovery = (minRecovery / p2.maxHP) * 100;
+			minRecovery = Math.round(minRecovery * 10) / 10;
+			if (minDamage === 0) {
+				minRecovery = 0;
+			}
+			
+			var maxRecovery = Math.floor((Math.min(maxDamage, p1.curHP)) * recoveryMultiplier);
+			if (maxRecovery === 0) {
+				maxRecovery = 0;
+			}
+			if (p2.ability === 'Overcompensate') {
+				maxRecovery *= 1.3
+			}
+			if (p2.item === 'Bandage') {
+				maxRecovery *= 1.3
+			}
+			maxRecovery = (maxRecovery / p2.maxHP) * 100;
+			maxRecovery = Math.round(maxRecovery * 10) / 10;
+			if (maxDamage === 0) {
+				maxRecovery = 0;
+			}
+			if (minRecovery > 100) {
+				minRecovery = 100;
+			}
+			if (maxRecovery > 100) {
+				maxRecovery = 100;
+			}
+			if (p1.ability === 'Bad Medicine') {
+				recoveryText = (' (' + minRecovery + ' - ' + maxRecovery + notation + ' recoil)');
+			} else {
+				recoveryText = (' (' + minRecovery + ' - ' + maxRecovery + notation + ' recovered)');
+			}
 		}
+		//recoil handler
+		//code rewrite because the old one didn't work
 		var recoilText = '';
-		if (typeof p2.moves[i].hasRecoil === 'number') {
-			var damageOverflow = minDamage > p1.curHP || maxDamage > p1.curHP;
-			var minRecoilDamage = notation === '%' ? Math.floor(Math.min(minDamage, p1.curHP) * p2.moves[i].hasRecoil * 10 / p2.maxHP) / 10 :
-				Math.floor(Math.min(minDamage, p1.curHP) * p2.moves[i].hasRecoil * 0.48 / p2.maxHP);
-			var maxRecoilDamage = notation === '%' ? Math.floor(Math.min(maxDamage, p1.maxHP) * p2.moves[i].hasRecoil * 10 / p2.maxHP) / 10 :
-				Math.floor(Math.min(maxDamage, p1.curHP) * p2.moves[i].hasRecoil * 0.48 / p2.maxHP);
-			if (damageOverflow) {
-				minRecoilDamage = notation === '%' ? Math.floor(Math.min(p1.maxHP * p2.moves[i].hasRecoil) * 10 / p2.maxHP) / 10 :
-					Math.floor(p1.maxHP * p2.moves[i].recoilPercentage * 0.48 / p1.maxHP);
-				maxRecoilDamage = notation === '%' ? Math.floor(Math.min(p1.maxHP, p2.moves[i].hasRecoil) * 10 / p2.maxHP) / 10 :
-					Math.floor(Math.min(p1.maxHP, p2.moves[i].hasRecoil) * 0.48 / p2.maxHP);
+		var recoilMultiplier = 1/3
+		if (p2.moves[i].name === 'Spirit Rush') {
+			recoilMultiplier = 1/4;
+		} else if (p2.moves[i].name === 'Full Metal Crash') {
+			recoilMultiplier = 1/2;
+		}
+		if (p2.moves[i].hasRecoil === 'number') {
+			var minRecoilDamage = Math.floor((Math.min(minDamage, p1.curHP)) * recoilMultiplier);
+			if (minRecoilDamage === 0) {
+				minRecoilDamage = 1;
 			}
-			recoilText = ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' recoil damage)';
+			minRecoilDamage = (minRecoilDamage / p2.maxHP) * 100;
+			minRecoilDamage = Math.round(minRecoilDamage * 10) / 10;
+			if (minDamage === 0) {
+				minRecoilDamage = 0;
+			}
+			
+			var maxRecoilDamage = Math.floor((Math.min(maxDamage, p1.curHP)) * recoilMultiplier);
+			if (maxRecoilDamage === 0) {
+				maxRecoilDamage = 1;
+			}
+			maxRecoilDamage = (maxRecoilDamage / p2.maxHP) * 100;
+			maxRecoilDamage = Math.round(maxRecoilDamage * 10) / 10;
+			if (maxDamage === 0) {
+				maxRecoilDamage = 0;
+			}
+			if (minRecoilDamage > 100) {
+				minRecoilDamage = 100;
+			}
+			if (maxRecoilDamage > 100) {
+				maxRecoilDamage = 100;
+			}
+			if (p2.ability === 'Recoil Offset' || p1.ability === 'Imposing Stance') {
+				minRecoilDamage = 0;
+				maxRecoilDamage = 0;
+			}
+			recoilText = (' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' recoil damage)');
 		} else if (p2.moves[i].hasRecoil === 'crash') {
-			var genMultiplier = gen === 2 ? 12.5 : gen >= 3 ? 50 : 1;
-			var gen4CrashDamage = Math.floor(p2.maxHP * 0.5 / p1.maxHP * 100);
-			var minRecoilDamage = notation === '%' ? Math.floor(Math.min(minDamage, p1.maxHP) * genMultiplier * 10 / p2.maxHP) / 10 :
-				Math.floor(Math.min(minDamage, p1.maxHP) * 0.48 / p2.maxHP);
-			var maxRecoilDamage = notation === '%' ? Math.floor(Math.min(maxDamage, p1.maxHP) * genMultiplier * 10 / p2.maxHP) / 10 :
-				Math.floor(Math.min(maxDamage, p1.maxHP) * 0.48 / p2.maxHP);
-			if (damageOverflow && gen !== 2) {
-				minRecoilDamage = notation === '%' ? Math.floor(Math.min(p1.maxHP, genMultiplier) * 10 / p2.maxHP) / 10 :
-					Math.floor(Math.min(p1.maxHP, p1.maxHP) * genMultiplier * 0.48);
-				maxRecoilDamage = notation === '%' ? Math.floor(Math.min(p1.maxHP, genMultiplier) * 10 / p2.maxHP) / 10 :
-					Math.floor(Math.min(p1.maxHP, p2.maxHP) * genMultiplier * 0.48);
+			var crashDamage = Math.floor(p2.maxHP / 2);
+			if (crashDamage === 0) {
+				crashDamage = 1;
 			}
-			recoilText = gen === 1 ? ' (1hp damage on miss)' :
-				gen === 2 ? (p1.type1 === "Ghost" || p1.type2 === "Ghost") ? ' (no crash damage on Ghost types)' : ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' crash damage on miss)' :
-					gen === 3 ? (p1.type1 === "Ghost" || p1.type2 === "Ghost") ? ' (no crash damage on Ghost types)' : ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' crash damage on miss)' :
-						gen === 4 ? (p1.type1 === "Ghost" || p1.type2 === "Ghost") ? ' (' + gen4CrashDamage + '% crash damage)' : ' (' + minRecoilDamage + ' - ' + maxRecoilDamage + notation + ' crash damage on miss)' :
-							gen > 4 ? ' (50% crash damage)' :
-								'';
-		} else if (p2.moves[i].hasRecoil === 'Struggle') {
-			recoilText = ' (25% struggle damage)';
-		} else if (p2.moves[i].hasRecoil) {
-			recoilText = ' (50% recoil damage)';
+			crashDamage = (crashDamage / p2.maxHP) * 100;
+			crashDamage = Math.round(crashDamage * 10) / 10;
+			if (p2.ability === 'Imposing Stance') {
+				crashDamage = 0;
+			}
+			recoilText = (' (' +  crashDamage + '%' + ' crash damage)');
 		}
 		var bestMove;
 		$(resultLocations[1][i].move + " + label").text(p2.moves[i].name.replace("Hidden Power", "HP"));
