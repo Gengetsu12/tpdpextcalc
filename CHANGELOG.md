@@ -16,7 +16,7 @@ Bugfixes
 
 -Reckless now correctly applies its damage boost
 
--Struggle is no longer treated as a void type move by 'form' moves
+-Struggle is no longer treated as a void type move by 'form' abilities
 
 -Damage ranges for recoil and recovery now properly display
 
