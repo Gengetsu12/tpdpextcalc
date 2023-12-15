@@ -8,6 +8,15 @@
 	if (damage[0] >= defender.maxHP && (move.usedTimes === 1 && move.metronomeCount === 1)) {
 		return 'guaranteed OHKO';
 	}
+	
+	//kohryu handler
+	//this can't be done using the wasteful handler so we're doing it here
+	if (field.terrain === "Kohryu" && attacker.ability !== "Central Expanse") {
+		attacker.item = "";
+	}
+	if (field.terrain === "Kohryu" && defender.ability !== "Central Expanse") {
+		defender.item = "";
+	}
 
 	var hazards = 0;
 	var hazardText = [];

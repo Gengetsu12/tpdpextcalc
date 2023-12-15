@@ -114,9 +114,11 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 		atkAbility = "";
 		description.defenderAbility = defAbility;
 	}
-	if (["Drunkard", "Unbound", "Brute Force", "Invalidate"].indexOf(atkAbility) !== -1) {
+	if (["Drunkard", "Unbound", "Brute Force", "Invalidate"].indexOf(atkAbility) !== -1 || field.terrain === "Kohryu") {
 		defAbility = "";
-		if (atkYoumaMod === "") { description.attackerAbility = atkAbility; }
+		if (atkYoumaMod === "" && field.terrain !== "Kohryu") {
+			description.attackerAbility = atkAbility;
+		}
 	}
 
 	//Auto-crit flag
@@ -493,7 +495,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
             toTPDPStat(defenseStat);
 	if (defender.boosts[defenseStat] === 0 || (isCritical && defender.boosts[defenseStat] > 0) || move.ignoresDefenseBoosts) {
 		defense = defender.rawStats[defenseStat];
-	} else if (attacker.ability === "Wisdom Eye") {
+	} else if (attacker.ability === "Wisdom Eye" || (attacker.ability === "Central Expanse" && field.terrain === "Kohryu")) {
 		defense = defender.rawStats[defenseStat];
 		description.attackerAbility = attacker.ability;
 	} else {
@@ -536,8 +538,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	//Damage Formula is as follows:
 	//(([Attacker Level]*0.4 + 2) * [Attacking Stat]※[Atk Modifiers] * [Base Power]※[BP Modifiers] / ([Defense Stat]*[Def Modiifers]) / 50) + 2 = A
 	var baseDamage = getBaseDamage(attacker.level, basePower, attack, defense);
-
-	//DMG = A ※ [Critical Hit] ※ [RNG] ※ [Effectiveness] ※ [STAB] ※ [Weather] ※ [Attacker Item] ※ [Defender Item] ※ [Attacker Ability] ※ [Defender Ability] ※ [Screens]
+	
 	//Since RNG comes 3rd in this equation, we can only really apply the crit factor first
 	if (isCritical) {
 		baseDamage = Math.floor(baseDamage * (atkAbility === "Sniper" ? 2.25 : 1.5)); //According to the damage calculation formula, Sniper is applied here
@@ -580,14 +581,14 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	//Prepare Item modifications (besides ones that explicitly modify stats like Choice Ring, Golden Hairpin, Youma, etc.)
 	var atkItem = "", atkItemType = "None";
 	var defItem = "", defItemType = "None";
-	if (field.terrain !== "Kohryu" || atkAbility === "Central Expanse") {
+	if (field.terrain !== "Kohryu" || field.terrain === "Kohryu" && attacker.item === "Boundary Trance" || atkAbility === "Central Expanse") {
 		atkItem = attacker.item;
 		atkItemType = getItemType(atkItem);
 		if (field.terrain === "Kohryu") {
 			description.attackerAbility = atkAbility;
 		}
 	}
-	if (field.terrain !== "Kohryu" || defAbility === "Central Expanse") {
+	if (field.terrain !== "Kohryu" || field.terrain === "Kohryu" && defender.item === "Boundary Trance" || defAbility === "Central Expanse") {
 		defItem = defender.item;
 		defItemType = getItemType(defItem);
 		if (field.terrain === "Kohryu") {

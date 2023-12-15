@@ -746,7 +746,8 @@ var MOVES_YNK = {
 		type: "Water",
 		category: "Spread",
 		bp: 60,
-		acc100: true
+		acc100: true,
+		alwaysCrit: true
 	},
 	"Slime Shot": {
 		type: "Water",
@@ -938,7 +939,8 @@ var MOVES_YNK = {
 		category: "Spread",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Swirling Leaves": {
 		type: "Nature",
@@ -1020,7 +1022,8 @@ var MOVES_YNK = {
 		category: "Focus",
 		isEN: true,
 		bp: 50,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Apple Bomb": {
 		type: "Nature",
@@ -1091,7 +1094,8 @@ var MOVES_YNK = {
 		type: "Earth",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Spiked Stones": {
 		type: "Earth",
@@ -1286,7 +1290,8 @@ var MOVES_YNK = {
 		type: "Steel",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Reversal Sword": {
 		type: "Steel",
@@ -1680,7 +1685,8 @@ var MOVES_YNK = {
 		category: "Spread",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Lightning Speed": {
 		type: "Electric",
@@ -1775,7 +1781,8 @@ var MOVES_YNK = {
 		type: "Electric",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Shocking Wave": {
 		type: "Electric",
@@ -1803,7 +1810,8 @@ var MOVES_YNK = {
 		category: "Focus",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Light Javelin": {
 		type: "Light",
@@ -2532,7 +2540,8 @@ var MOVES_YNK = {
 		type: "Fighting",
 		category: "Focus",
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Break Shot": {
 		type: "Fighting",
@@ -4089,7 +4098,8 @@ var MOVES_SOD = {
 		type: "Water",
 		category: "Spread",
 		bp: 60,
-		acc100: true
+		acc100: true,
+		alwaysCrit: true
 	},
 	"Slime Shot": {
 		type: "Water",
@@ -4280,7 +4290,8 @@ var MOVES_SOD = {
 		category: "Spread",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Swirling Leaves": {
 		type: "Nature",
@@ -4362,7 +4373,8 @@ var MOVES_SOD = {
 		category: "Focus",
 		isEN: true,
 		bp: 50,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Apple Bomb": {
 		type: "Nature",
@@ -4433,7 +4445,8 @@ var MOVES_SOD = {
 		type: "Earth",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Spiked Stones": {
 		type: "Earth",
@@ -4628,7 +4641,8 @@ var MOVES_SOD = {
 		type: "Steel",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Reversal Sword": {
 		type: "Steel",
@@ -5022,7 +5036,8 @@ var MOVES_SOD = {
 		category: "Spread",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Lightning Speed": {
 		type: "Electric",
@@ -5117,7 +5132,8 @@ var MOVES_SOD = {
 		type: "Electric",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Shocking Wave": {
 		type: "Electric",
@@ -5145,7 +5161,8 @@ var MOVES_SOD = {
 		category: "Focus",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Light Javelin": {
 		type: "Light",
@@ -5874,7 +5891,8 @@ var MOVES_SOD = {
 		type: "Fighting",
 		category: "Focus",
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Break Shot": {
 		type: "Fighting",
@@ -7322,7 +7340,8 @@ var MOVES_BASE = {
 		type: "Water",
 		category: "Spread",
 		bp: 60,
-		acc100: true
+		acc100: true,
+		alwaysCrit: true
 	},
 	"Slime Shot": {
 		type: "Water",
@@ -7513,7 +7532,8 @@ var MOVES_BASE = {
 		category: "Spread",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Swirling Leaves": {
 		type: "Nature",
@@ -7595,7 +7615,8 @@ var MOVES_BASE = {
 		category: "Focus",
 		isEN: true,
 		bp: 50,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Apple Bomb": {
 		type: "Nature",
@@ -7666,7 +7687,8 @@ var MOVES_BASE = {
 		type: "Earth",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Spiked Stones": {
 		type: "Earth",
@@ -7844,7 +7866,8 @@ var MOVES_BASE = {
 		type: "Steel",
 		category: "Focus",
 		bp: 70,
-		accuracy: 90
+		accuracy: 90,
+		alwaysCrit: true
 	},
 	"Reversal Sword": {
 		type: "Steel",
@@ -8203,7 +8226,8 @@ var MOVES_BASE = {
 		category: "Spread",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Lightning Speed": {
 		type: "Electric",
@@ -8306,7 +8330,8 @@ var MOVES_BASE = {
 		category: "Focus",
 		isEN: true,
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Light Javelin": {
 		type: "Light",
@@ -8967,7 +8992,8 @@ var MOVES_BASE = {
 		type: "Fighting",
 		category: "Focus",
 		bp: 75,
-		acc100: true
+		acc100: true,
+		givesHealth: true
 	},
 	"Break Shot": {
 		type: "Fighting",

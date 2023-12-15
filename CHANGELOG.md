@@ -1,3 +1,32 @@
+Changelog - v2.1.7a
+=======================
+
+Additions
+------------
+
+Sample sets for the following puppets have been added: AShingyoku, DElly, DReimu, DShingyoku, EElly, EKurumi, EMarisa, EOrange, EReimu, ESeija, PDoremy, PMarisa, POrange, PReimu, PTenshi, PYuuka
+
+-Thorn Charm, Straw Doll, Small Bit, Counter Bit, Reflect Bit, Giant Bit, Some Guts, Karmic Retribution, Counter Stance, Reflect Guard and Full Power now display any end of attack chip damage they may cause when selecting applicable skills
+
+Bugfixes
+------------
+
+-Imposing Stance no longer disables recoil damage from player 2's skills when used by player 1
+
+-Parasite, Energy Absorb, Charge Thief, Atomic Energy and Aura Drain now properly drain health
+
+-Geyser, Rock Drills, Killing Bite and Thunder Drill now properly crit automatically when selected
+
+-Kohryu now properly disables damage modifiers from abilities
+
+-Kohryu now properly disables immunity abilities
+
+-Kohryu now properly disables sources of healing/damage affected by items
+
+-Kohryu no longer incorrectly disables the Boundary Trance
+
+-Central Expanse now correctly ignores opposing defensive stat changes
+
 Changelog - v2.1.6a
 =======================
 
@@ -16,7 +45,7 @@ Bugfixes
 
 -Reckless now correctly applies its damage boost
 
--Struggle is no longer treated as a void type move by 'form' abilities
+-Struggle is no longer treated as a void type move by 'form' moves
 
 -Damage ranges for recoil and recovery now properly display
 
