@@ -1,3 +1,20 @@
+Changelog - v2.1.8a
+=======================
+
+Additions
+------------
+
+Sample sets for the following puppets have been added: AEika, ASunny, DAkyuu, DEika, DOrange, DSeija, DYuuma, EEirin, EElis, ELouise, EMokou, ERumia, ESatono, ESeiga, ESeiran, ESumireko, ESunny, ETewi, EWakasagi, EWriggle, EYoumu, EYumeko, PFuto, PHecatia, PMagan, PMamizou, PMaribel, PRikako, PSunny, PTokiko, PWakasagi, SMayumi, SMegumu, SNazrin, STojiko
+
+Bugfixes
+------------
+
+-Cloak of Darkness now applies the correct damage bonus to Light type moves
+
+-'Form' abilities no longer apply their damage boost twice
+
+-Kohryu now properly disables damage modifiers from abilities (for real this time)
+
 Changelog - v2.1.7a
 =======================
 
@@ -45,7 +62,7 @@ Bugfixes
 
 -Reckless now correctly applies its damage boost
 
--Struggle is no longer treated as a void type move by 'form' moves
+-Struggle is no longer treated as a void type move by 'form' abilities
 
 -Damage ranges for recoil and recovery now properly display
 

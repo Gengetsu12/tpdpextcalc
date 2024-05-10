@@ -613,7 +613,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	} else if ((atkItem === "Radiant Hairpin" && attacker.curHP / attacker.maxHP === 1) && gen === 8) {
 		finalMods.push(1.4);
 		description.attackerItem = attacker.item;
-	} else if (atkItem === "Straw Doll" || (atkItem === "Radiant Hairpin" && attacker.curHP / attacker.maxHP === 1) && gen !== 8 || (atkItem === "Tsuzumi Drum" && (!isSTAB) || (formBoosted === true))) {
+	} else if (atkItem === "Straw Doll" || (atkItem === "Radiant Hairpin" && attacker.curHP / attacker.maxHP === 1) && gen !== 8 || (atkItem === "Tsuzumi Drum" && (!isSTAB))) {
 		finalMods.push(1.3);
 		description.attackerItem = atkItem;
 	} else if (atkItem === "Javelin Arts" && move.isJavelin === true || atkItem === "Deadly Secrets" && typeEffectiveness > 1) {
@@ -702,7 +702,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 			   (atkAbility === "Empowered" && move.isEN) ||
 			   (atkAbility === "Astronomy" && !(move.isEN)) ||
                (atkAbility === "First Hit" && turnOrder === "FIRST") ||
-                atkAbility === "Full Power") {
+               atkAbility === "Full Power") {
 		pendingMod = 1.2;
 	} else if (atkAbility === "Mindless Dance" && move.willLock) {
 		pendingMod = 0.9;
@@ -713,8 +713,10 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 		pendingMod = 0.66;
 	}
 	//Skip over the entire above section's power modifications if Ascertainment is present
-	if (pendingMod !== 1 && defAbility === "Ascertainment") { //NOTE: This also blocks the power reduction from 2 of a kind, but NOT the multihit!
-		description.defenderAbility = defAbility;
+	if (pendingMod !== 1 && (defAbility === "Ascertainment" || field.terrain === "Kohryu")) { //NOTE: This also blocks the power reduction from 2 of a kind, but NOT the multihit!
+		if (defAbility === "Ascertainment") {
+			description.defenderAbility = defAbility;
+		}
 	} else if (pendingMod !== 1) {
 		finalMods.push(pendingMod);
 		if (atkYoumaMod === "") { description.attackerAbility = atkAbility; } //account for Bibliophilia (Blue)
@@ -723,7 +725,7 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 	//Defense-related abilities
 	pendingMod = 1;
 	if (defAbility === "Cloak of Darkness" && move.type === "Light") {
-		pendingMod = 1.5;
+		pendingMod = 1.25;
 	} else if (defAbility === "Slow Tempo") {
 		pendingMod = 0.9;
 	} else if (defAbility === "Spirit of Yin" && (move.type === "Poison" || move.type === "Dark" || move.type === "Nether") && gen !== 5 ||
@@ -744,8 +746,10 @@ function getDamageResult(attacker, defender, move, field, ironWill) {
 		pendingMod = 0.5;
 	}
 	//Skip over the entire above section's power modifications if Ascertainment is present
-	if (pendingMod !== 1 && atkAbility === "Ascertainment") {
-		description.attackerAbility = atkAbility;
+	if (pendingMod !== 1 && atkAbility === "Ascertainment" || field.terrain === "Kohryu") {
+		if (atkAbility === "Ascertainment") {
+			description.attackerAbility = atkAbility;
+		}
 	} else if (pendingMod !== 1) {
 		finalMods.push(pendingMod);
 		if (defYoumaMod === "") { description.defenderAbility = defAbility; } //account for Bibliophilia (Blue)
