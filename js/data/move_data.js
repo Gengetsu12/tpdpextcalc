@@ -2290,6 +2290,7 @@ var MOVES_YNK = {
 		category: "Focus",
 		bp: 120,
 		acc100: true,
+		hasSecondaryEffect: true,
 		hasRecoil: "number"
 	},
 	"Stalk and Murder": {
